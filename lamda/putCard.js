@@ -22,8 +22,8 @@ exports.handler = async event => {
               ':t' : body.title,
             }
           };
-        //결과 받기(id)
-        const cards = await documentClient.update(params).promise();
+       
+        await documentClient.update(params).promise();
 
         response = {
             statusCode: 200
