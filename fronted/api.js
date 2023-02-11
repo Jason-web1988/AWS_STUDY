@@ -1,18 +1,5 @@
 export default class APIHandler {
-  constructor() {
-    this.dummyData = [
-      {
-        id: "abc123",
-        title: "데이터베이스 구축하기",
-        category: "ongoing"
-      },
-      {
-        id: "def456",
-        title: "데이터베이스 삭제하기",
-        category: "todo"
-      }
-    ];
-  }
+  constructor() {}
 
   // TODO: 전체 카드 객체 리스트 반환. 없으면 NULL
   async getCards() {
@@ -52,7 +39,35 @@ export default class APIHandler {
     });
     console.log(this.dummyData);
   }
+}
 
-  // TODO: API 요청 컨테이너. Method, Path, Body 속성
-  // TODO: API 호출 함수
+const HOST = "https://5bskahhafc.execute-api.ap-northeast-2.amazonaws.com/prod"
+
+// TODO: API 요청 컨테이너. Method, Path, Body 속성
+class APIRequest{
+  constructor(method, path, body){
+    this.method = method;
+    this.url = HOST + path;
+    this.body = body;
+  }
+}
+
+// TODO: API 호출 함수
+const APIProcessor = async (request) => {
+  
+  const reponse = await fetchfetch(request.url, {
+    method: request.method, // *GET, POST, PUT, DELETE 등
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    //credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept' : 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+   //redirect: 'follow', // manual, *follow, error
+   //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: request.body ?JSON.stringify(request.body) : null // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
+  });
+  console.log("response : " +  reesponse.toString);
 }
