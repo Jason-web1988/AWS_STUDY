@@ -27,7 +27,7 @@ exports.handler = async event => {
 
         response = {
             //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
-            statusCode: 200,
+            statusCode: 204,
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },

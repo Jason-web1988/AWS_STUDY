@@ -21,11 +21,12 @@ exports.handler = async event => {
         };        
 
         //결과 받기(id)
-        const cards = await documentClient.put(params).promise();
-
+        //const cards = await documentClient.put(params).promise();
+        await documentClient.put(params).promise();
+        
         response = {
             //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
-            statusCode: 200,
+            statusCode: 201,
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },

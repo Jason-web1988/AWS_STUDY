@@ -32,12 +32,11 @@ export default class APIHandler {
 
   // TODO: ID로 카드 검색 후 내용,카테고리 수정
   async putCard(cardObj) {
-    this.dummyData = this.dummyData.map(card => {
-      return card.id === cardObj.id
-        ? { ...card, category: cardObj.category, title: cardObj.title }
-        : card;
+    const request = new APIRequest("PUT", `/kanban/cards/${cardObj.id}`,{
+      title : cardObj.title, 
+      category : cardObj.category
     });
-    console.log(this.dummyData)
+    const response = await APIProcessor(request);
   }
 
   // TODO: ID로 카드 검색 후 삭제
@@ -80,7 +79,10 @@ const APIProcessor = async (request) => {
       //body를 보고 싶으면 제공하는 메소드 https://developer.mozilla.org/en-US/docs/Web/API/Response 참고!
       switch(response.status){
         case 200 : 
+        case 201 :
           return await response.json();
+        case 204 :
+          return null;  
         default : 
             console.error(await response.json());
           }
