@@ -67,7 +67,8 @@ const APIProcessor = async (request) => {
         //credentials: 'same-origin', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
-          'Accept' : 'application/json'  
+          'Accept' : 'application/json',
+          'x-api-key' : '4FXInOlosS4upjDHQKat658LYRkc0ViP48NOxT5B'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       //redirect: 'follow', // manual, *follow, error
