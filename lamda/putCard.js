@@ -26,12 +26,20 @@ exports.handler = async event => {
         await documentClient.update(params).promise();
 
         response = {
-            statusCode: 200
+            //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            },
         };
     }catch (exception){
         console.error(exception);
         response = {
+            //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
             statusCode: 500,
+            headers: {
+                "Access-Control-Allow-Origin": "*"
+            },
             body: JSON.stringify({"Message : ": exception}),
         };
     }
