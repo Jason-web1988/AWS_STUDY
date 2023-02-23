@@ -38,7 +38,7 @@ Resources:
       Cors:
         AllowMethods: "'*'"
         AllowHeaders: "'*'"
-        AllowOrigin: "'*'"
+        AllowOrigin: "'*'""
       Auth:
         UsagePlan:
           CreateUsagePlan: PER_API
