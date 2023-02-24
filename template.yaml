@@ -38,7 +38,7 @@ Resources:
       Cors:
         AllowMethods: "'*'"
         AllowHeaders: "'*'"
-        AllowOrigin: "'*'""
+        AllowOrigin: "'*'"
       Auth:
         UsagePlan:
           CreateUsagePlan: PER_API
@@ -75,6 +75,60 @@ Resources:
           Properties:
             Path: /kanban/cards
             Method: get
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+  PostCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: PostCards
+      CodeUri: lambda/postcard
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+        - x86_64
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards
+            Method: post
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+  PutCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: PutCards
+      CodeUri: lambda/putcard
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+        - x86_64
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: put
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+  DeleteCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: DeleteCards
+      CodeUri: lambda/deletecard
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+        - x86_64
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: delete
             Auth:
               ApiKeyRequired: true
             RestApiId: !Ref APIGateway

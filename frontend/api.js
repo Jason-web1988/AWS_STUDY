@@ -46,7 +46,7 @@ export default class APIHandler {
   }
 }
 
-const HOST = "https://5bskahhafc.execute-api.ap-northeast-2.amazonaws.com/prod"
+const HOST = "https://z13u14ipj1.execute-api.ap-northeast-2.amazonaws.com/prod"
 
 // TODO: API 요청 컨테이너. Method, Path, Body 속성
 class APIRequest{
@@ -68,7 +68,7 @@ const APIProcessor = async (request) => {
         headers: {
           'Content-Type': 'application/json',
           'Accept' : 'application/json',
-          'x-api-key' : '4FXInOlosS4upjDHQKat658LYRkc0ViP48NOxT5B'
+          'x-api-key' : 'bbYNnTFst5a7ShHgnYauW3Y3JwNePAN7p4nNccua'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       //redirect: 'follow', // manual, *follow, error

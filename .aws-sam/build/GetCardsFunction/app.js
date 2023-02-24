@@ -15,7 +15,7 @@ exports.handler = async event => {
 
     console.log("Received : " + JSON.stringify(event, null, 2));
     let response = "";
-    var params 
+    var params;
     try{
         params = {
             TableName : tableName            

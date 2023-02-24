@@ -76,6 +76,66 @@ Resources:
               Ref: APIGateway
     Metadata:
       SamResourceId: GetCardsFunction
+  PostCardsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PostCards
+      CodeUri: PostCardsFunction
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+      - x86_64
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /kanban/cards
+            Method: post
+            Auth:
+              ApiKeyRequired: true
+            RestApiId:
+              Ref: APIGateway
+    Metadata:
+      SamResourceId: PostCardsFunction
+  PutCardsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PutCards
+      CodeUri: PutCardsFunction
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+      - x86_64
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: put
+            Auth:
+              ApiKeyRequired: true
+            RestApiId:
+              Ref: APIGateway
+    Metadata:
+      SamResourceId: PutCardsFunction
+  DeleteCardsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: DeleteCards
+      CodeUri: DeleteCardsFunction
+      Role: arn:aws:iam::286499896170:role/Lambda_Kanban_Role
+      Architectures:
+      - x86_64
+      Events:
+        Trigger:
+          Type: Api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: delete
+            Auth:
+              ApiKeyRequired: true
+            RestApiId:
+              Ref: APIGateway
+    Metadata:
+      SamResourceId: DeleteCardsFunction
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
     Properties:

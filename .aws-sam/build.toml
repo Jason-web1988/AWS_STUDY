@@ -10,4 +10,31 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["GetCardsFunction"]
 
+[function_build_definitions.281ba4b6-b22f-46e9-b882-675763627a53]
+codeuri = "/Users/leehyeonseok/AWS_STUDY/lambda/postcard"
+runtime = "nodejs12.x"
+architecture = "x86_64"
+handler = "app.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["PostCardsFunction"]
+
+[function_build_definitions.8c10d939-b397-4356-a786-adce9523fe53]
+codeuri = "/Users/leehyeonseok/AWS_STUDY/lambda/putcard"
+runtime = "nodejs12.x"
+architecture = "x86_64"
+handler = "app.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["PutCardsFunction"]
+
+[function_build_definitions.a6bb4c60-4e1a-43ec-ab49-71616db233b9]
+codeuri = "/Users/leehyeonseok/AWS_STUDY/lambda/deletecard"
+runtime = "nodejs12.x"
+architecture = "x86_64"
+handler = "app.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["DeleteCardsFunction"]
+
 [layer_build_definitions]

@@ -13,31 +13,30 @@ exports.handler = async event => {
 
     console.log("Received : " + JSON.stringify(event, null, 2));
     let response = "";
-    var params;
-
+    var params 
     try{
-        const id = event.requestContext.requestId;
-        const body = JSON.parse(event.body);
+        const id = event.pathParameters.id;
+        const body = JSON.parse(event.body);     
             params = {
-            TableName : tableName,     
-            Item: {
-                "id" : id,
-                "title" : body.title,
-                "category" : body.category
-             }                  
-        };        
+            TableName: tableName,
+            Key: { id :  id},
+            UpdateExpression: 'set #c = :c, #t = :t',   //#c : category, #t : title
+            //ConditionExpression: '#a < :MAX', 여기서 사용안해서 주석
+            ExpressionAttributeNames: {'#c' : "category", "#t" : "title"},
+            ExpressionAttributeValues: {
+              ':c' : body.category,
+              ':t' : body.title,
+            }
+          };
+       
+        await documentClient.update(params).promise();
 
-        //결과 받기(id)
-        //const cards = await documentClient.put(params).promise();
-        await documentClient.put(params).promise();
-        
         response = {
             //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
-            statusCode: 201,
+            statusCode: 204,
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },
-            body: JSON.stringify({"id":id}),
         };
     }catch (exception){
         console.error(exception);

@@ -13,31 +13,24 @@ exports.handler = async event => {
 
     console.log("Received : " + JSON.stringify(event, null, 2));
     let response = "";
-    var params;
-
+    var params 
     try{
-        const id = event.requestContext.requestId;
-        const body = JSON.parse(event.body);
+        const id = event.pathParameters.id;   
             params = {
-            TableName : tableName,     
-            Item: {
-                "id" : id,
-                "title" : body.title,
-                "category" : body.category
-             }                  
-        };        
+            TableName : tableName,
+            Key: {
+              "id": id
+            }
+          };
+      
+        await documentClient.delete(params).promise();
 
-        //결과 받기(id)
-        //const cards = await documentClient.put(params).promise();
-        await documentClient.put(params).promise();
-        
         response = {
             //꼭! 읽어보기 https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-cors.html
-            statusCode: 201,
+            statusCode: 204,
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },
-            body: JSON.stringify({"id":id}),
         };
     }catch (exception){
         console.error(exception);
